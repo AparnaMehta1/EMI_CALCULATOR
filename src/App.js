@@ -3,11 +3,13 @@ import './App.css';
 import {withStyles} from "@material-ui/core/styles";
 import Slider from "@material-ui/core/Slider";
 import Typography  from '@material-ui/core/Typography';
-import {Button, Table, TableCell, TableRow} from "@material-ui/core";
+import {Table, TableCell, TableRow} from "@material-ui/core";
 import {Pie} from "react-chartjs-2";
-import TableDetails from "./TableDetails";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+
 import SliderMarks from "./SliderMarks";
 import Detail from "./Details";
+
 
 
 const PrettoSlider = withStyles({
@@ -16,6 +18,9 @@ const PrettoSlider = withStyles({
   track: {height:10,borderRadius:4},
   rail:  {height:10, borderRadius:4},
 }) (Slider);
+
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 function App() {
    // Modal open state
@@ -53,34 +58,47 @@ const TotalAmountOfInterest = Math.round(totalAmount -TotalAmountOfCredit);
 </div>
 <div>
   <Typography gutterBottom> <strong>Tenture (Months)</strong> </Typography>
-  <PrettoSlider value={duration} onChange={(event , vDur)=>(setduration (parseInt(vDur)))} 
+  <PrettoSlider value={duration} onChange={(event , vDur)=>(setduration (vDur))} 
   defaultValue={duration} marks={SliderMarks.marksTenure} max={maxDuraion} />  
 </div>
 <div>
 <Table>
   <TableRow>
     <TableCell>
-      <TableDetails  pAmount={pAmount}  emi={emi} duration= {duration}
-      interest={interest} totalAmount= {totalAmount} TotalAmountOfInterest= {TotalAmountOfInterest}/>
+    <form className="form">
+       <div>
+       <label for="pAmount"> Loan Amount : </label>
+       <input type="number" id="fname" placeholder="Enter Amount" maxlength="1500" name="name" value={pAmount}  onChange={(event , vAmount)=>(setpAmount(vAmount))} />
+       </div>
+       <div>
+       <label for="pAmount"> Interest Rate % : </label>
+       <input type="number" id="fname" placeholder="Enter Rate" maxlength="15" name="name" value={interest} onChange={(event , vInt)=>(setinterest(vInt))}  />
+       </div>
+       <div>
+       <label for="pAmount"> Tenure (Months) : </label>
+       <input type="number" id="fname" placeholder="Enter Time" maxlength="15" name="name" value={duration} onChange={(event , vDur)=>(setduration (vDur))}/>
+       </div>
+       </form>
+  
+
     <input type="submit" placeholder="Submit" onClick={toggle} className="button"/>
+   
   
     </TableCell>
     
     <TableCell>
-     <h2>hello
-     </h2>
-        {/* <Pie
+        <Pie
       data= {{
-        lables : ['Total Interest' , 'Total Amount'],
+        lables : ['Credit Amount', "Interest" , 'Total Amount'],
         datasets : [{
-          data : [TotalAmountOfCredit , pAmount],
-          backgroundColor :['red', 'blue']
+          data : [TotalAmountOfCredit, TotalAmountOfInterest,pAmount],
+          backgroundColor :["red","orange", "yellow"]
         }]
       }}
-      width ={200}
-    height = {200} 
+      width ={50}
+    height = {50} 
   
-      />   */}
+      />  
     </TableCell>
   </TableRow>
 </Table>
@@ -90,6 +108,8 @@ const TotalAmountOfInterest = Math.round(totalAmount -TotalAmountOfCredit);
    <Detail modal={modal}
    setModal = {setModal}
    toggle = {toggle}
+   pAmount={pAmount}  emi={emi} duration= {duration}
+      interest={interest} totalAmount= {totalAmount} TotalAmountOfInterest= {TotalAmountOfInterest}
    />
     </div>
   );

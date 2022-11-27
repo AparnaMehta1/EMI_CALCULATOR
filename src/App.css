@@ -12,8 +12,43 @@
   text-align: right !important;
   font-size: 18px !important;
 }
+.form input{
+  background-color: rgb(225, 163, 163);
+  border: 1px solid rgb(243, 56, 56);
+  height: 16px; 
+  border-radius: 3px;
+}
+.form input:hover{
+  background-color: rgb(225, 163, 163);
+  border: 1px solid rgb(243, 56, 56);
+  height: 16px; 
+  border-radius: 3px;
+ 
+}
+.form{
+  display: block;
+  justify-content: center;
+  text-align: center;
+  background-color: aliceblue;
+border: 3px cornflowerblue solid;
+  padding: 20px;
+  border-radius: 3px;
+  color: blue;
+  font-size: large;
+}
+.history{
+  color:whitesmoke;
+  font-size:medium;
+  font-weight: 100px;
+  background-color:darkgray;
+  border-radius: 3px;
+  height: 12%;
+  width: 15%;
+}
+
 .button{
   background-color: rgb(91, 91, 205);
+
   color: rgb(243, 224, 210);
   font-size: 18px !important;
   border-radius: 3px;
@@ -21,6 +56,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  margin-top: 10px;
 
 }
 .CalApp{
