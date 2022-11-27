@@ -10,8 +10,9 @@ import  {
 const Detail = (props) => {
  
   return (
- 
-    <Modal isOpen={props.modal}
+ <div>
+  
+  <Modal  className ="modal" isOpen={props.modal}
                 toggle={props.toggle}
                 modalTransition={{ timeout: 2000 }}>
                 <ModalBody>
@@ -49,6 +50,7 @@ const Detail = (props) => {
     </Table>
                 </ModalBody>
             </Modal>
+ </div>
 
   )
 }

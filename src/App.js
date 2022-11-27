@@ -27,7 +27,24 @@ function App() {
    const [modal, setModal] = useState(false);
   
    // Toggle for Modal
-   const toggle = () => setModal(!modal);
+   const toggle = () => {
+    const history = {
+     "tAmount" : totalAmount,
+     "perAmount" : pAmount,
+     "rate": interest,
+     "time" : duration,
+
+    }
+    setModal(!modal);
+    localStorage.setItem("history",JSON.stringify({...history}));
+   }
+   let his;
+const getHistory = () => {
+  his = localStorage.getItem("history");
+ document.write(his);
+}
+// const {tAmount , time , rate , perAmount} = his;
+
  const [pAmount , setpAmount] =useState (2755000);
  const [interest , setinterest] =useState (7);
  const [duration , setduration] =useState (147);
@@ -82,7 +99,8 @@ const TotalAmountOfInterest = Math.round(totalAmount -TotalAmountOfCredit);
   
 
     <input type="submit" placeholder="Submit" onClick={toggle} className="button"/>
-   
+    
+    <button className="btn btn-light rounded-2 fs-5 fw-bold"   onClick={getHistory}>History</button>
   
     </TableCell>
     
